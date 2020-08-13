@@ -37,7 +37,7 @@ public abstract class AbstractWeightedFilter extends AbstractFilter {
      */
     @Override
     public void filter(final PixelImage theImage) {
-        weight(theImage, myWeights);
+        applyPixelWeight(theImage, myWeights);
     }
 
 }

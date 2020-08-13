@@ -19,12 +19,23 @@ public class EdgeDetectFilter extends AbstractFilter {
      * A 3x3 matrix of weights to use in the filtering algorithm.
      */
     private static final int[][] WEIGHTS = {{-1, -1, -1}, {-1, 8, -1}, {-1, -1, -1}};
+    
+    /**
+     * Name of the filter.
+     */
+    private static final String EDGE_DETECT = "Edge Detect";
 
     /**
      * Constructs a new edge detection filter.
      */
     public EdgeDetectFilter() {
-        super("Edge Detect");
+//        super("Edge Detect");
+        
+        /* Refactoring #6: Extract constant string.
+         * Scope: method.
+         * Author: Zitao Yu
+         */
+        super(EDGE_DETECT);
     }
 
     /**
@@ -34,6 +45,6 @@ public class EdgeDetectFilter extends AbstractFilter {
      */
     @Override
     public void filter(final PixelImage theImage) {
-        weight(theImage, WEIGHTS);
+        applyPixelWeight(theImage, WEIGHTS);
     }
 }

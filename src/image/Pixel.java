@@ -161,7 +161,7 @@ public class Pixel {
         }
     }
 
-    /* Refactoring #2: Extract method, to check if color value if out of range.
+    /* Refactoring #3: Extract method, to check if color value if out of range.
      * Scope: method.
      * Author: Zitao Yu
      */

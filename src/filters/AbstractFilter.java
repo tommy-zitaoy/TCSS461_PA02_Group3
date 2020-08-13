@@ -19,6 +19,11 @@ import image.PixelImage;
  * Scope: Entire class.
  * Author: Zitao Yu
  */
+
+/* Refactoring #2: Change method declaration.
+ * Scope: Entire class.
+ * Author: Zitao Yu
+ */
 public abstract class AbstractFilter implements Filter {
     /**
      * The "Filter" suffix.
@@ -99,7 +104,7 @@ public abstract class AbstractFilter implements Filter {
      *            or an IllegalArgumentException is thrown.
      * @exception IllegalArgumentException if the weights are invalid.
      */
-    protected void weight(final PixelImage theImage, final int[][] theWeights)
+    protected void applyPixelWeight(final PixelImage theImage, final int[][] theWeights)
         throws IllegalArgumentException {
         
         checkWeights(theWeights);
@@ -118,7 +123,7 @@ public abstract class AbstractFilter implements Filter {
             sum++;
         }
 
-        weight(theImage, theWeights, sum);
+        applyPixelWeight(theImage, theWeights, sum);
     }
 
     /**
@@ -131,23 +136,29 @@ public abstract class AbstractFilter implements Filter {
      * @exception IllegalArgumentException if the weights are invalid.
      * @see #weight(PixelImage, int[][])
      */
-    protected void weight(final PixelImage theImage, final int[][] theWeights,
+    
+    protected void applyPixelWeight(final PixelImage theImage, final int[][] theWeights,
                           final int theScale) throws IllegalArgumentException {
         checkWeights(theWeights);
-
-        final int w = theImage.getWidth(null);
-        final int h = theImage.getHeight(null);
+        /* Refactoring #5: Rename variable.
+         * Scope: This method.
+         * Author: Zitao Yu
+         */
+//        final int w = theImage.getWidth(null);
+//        final int h = theImage.getHeight(null);
+        final int width = theImage.getWidth(null);
+        final int height = theImage.getHeight(null);
         final Pixel[][] oldPixels = theImage.getPixelData();
-        final Pixel[][] newPixels = new Pixel[h][w];
+        final Pixel[][] newPixels = new Pixel[height][width];
 
-        for (int y = 0; y < h; y++) {
-            for (int x = 0; x < w; x++) {
+        for (int yAxis = 0; yAxis < height; yAxis++) {
+            for (int xAxis = 0; xAxis < width; xAxis++) {
                 // add up 9 neighboring pixels
                 int red = 0;
                 int green = 0;
                 int blue = 0;
-                for (int j = Math.max(0, y - 1); j <= Math.min(y + 1, h - 1); j++) {
-                    for (int i = Math.max(0, x - 1); i <= Math.min(x + 1, w - 1); i++) {
+                for (int j = Math.max(0, yAxis - 1); j <= Math.min(yAxis + 1, height - 1); j++) {
+                    for (int i = Math.max(0, xAxis - 1); i <= Math.min(xAxis + 1, width - 1); i++) {
                         // Pixel p = oldPixels[i][j];
 //                        final Pixel p = oldPixels[j][i];
 //                        final int weight = theWeights[y - j + 1][x - i + 1];
@@ -155,18 +166,18 @@ public abstract class AbstractFilter implements Filter {
 //                        green = green + p.getGreen() * weight;
 //                        blue = blue + p.getBlue() * weight;
                         
-                        red += oldPixels[j][i].getRed() * theWeights[y - j + 1][x - i + 1];
-                        green += oldPixels[j][i].getGreen() * theWeights[y - j + 1][x - i + 1];
-                        blue += oldPixels[j][i].getBlue() * theWeights[y - j + 1][x - i + 1];
+                        red += oldPixels[j][i].getRed() * theWeights[yAxis - j + 1][xAxis - i + 1];
+                        green += oldPixels[j][i].getGreen() * theWeights[yAxis - j + 1][xAxis - i + 1];
+                        blue += oldPixels[j][i].getBlue() * theWeights[yAxis - j + 1][xAxis - i + 1];
                     }
                 }
 
                 // account for negative / too high color values
-                red = normalize(red / theScale);
-                green = normalize(green / theScale);
-                blue = normalize(blue / theScale);
+                red = normalizeColor(red / theScale);
+                green = normalizeColor(green / theScale);
+                blue = normalizeColor(blue / theScale);
 
-                newPixels[y][x] = new Pixel(red, green, blue);
+                newPixels[yAxis][xAxis] = new Pixel(red, green, blue);
             }
         }
 
@@ -203,7 +214,7 @@ public abstract class AbstractFilter implements Filter {
      * @param theColor The color value.
      * @return the normalized color value.
      */
-    protected int normalize(final int theColor) {
+    protected int normalizeColor(final int theColor) {
         return Math.max(Pixel.MIN_COLOR_VALUE, Math.min(Pixel.MAX_COLOR_VALUE, theColor));
     }
 
@@ -216,7 +227,7 @@ public abstract class AbstractFilter implements Filter {
      * @param row2 The row of the second pixel to swap.
      * @param col2 The column of the second pixel to swap.
      */
-    protected void swap(final Pixel[][] theData, final int row1, final int col1,
+    protected void swapPixel(final Pixel[][] theData, final int row1, final int col1,
                         final int row2, final int col2) {
         final Pixel temp = theData[row1][col1];
         theData[row1][col1] = theData[row2][col2];

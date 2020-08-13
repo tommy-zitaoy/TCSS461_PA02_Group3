@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
  * @version 1.2
  */
 
-/* Refactoring #3: Inline variable.
+/* Refactoring #4: Inline variable.
  * Scope: entire class.
  * Author: Zitao Yu
  */
@@ -146,7 +146,7 @@ public final class PixelImage extends BufferedImage {
         }
     }
     
-    /* Refactoring #4: Extract method, to check if the array has a valid size, theSize parameter 
+    /* Refactoring #3: Extract method, to check if the array has a valid size, theSize parameter 
      * can be height or width.
      * Scope: method.
      * Author: Zitao Yu
