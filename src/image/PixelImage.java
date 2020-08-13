@@ -4,7 +4,6 @@
 
 package image;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
@@ -22,6 +21,10 @@ import javax.imageio.ImageIO;
  * @version 1.2
  */
 
+/* Refactoring #3: Inline variable.
+ * Scope: entire class.
+ * Author: Zitao Yu
+ */
 public final class PixelImage extends BufferedImage {
     /**
      * An error to be displayed when arrays are improperly sized.
@@ -60,8 +63,9 @@ public final class PixelImage extends BufferedImage {
         PixelImage image = null;
         if(buf != null) {
           image = new PixelImage(buf.getWidth(), buf.getHeight(), BufferedImage.TYPE_INT_RGB);
-          final Graphics g = image.getGraphics();
-          g.drawImage(buf, 0, 0, null);
+//          final Graphics g = image.getGraphics();
+//          g.drawImage(buf, 0, 0, null);
+          image.getGraphics().drawImage(buf, 0, 0, null);
         }
         
         return image;
@@ -96,14 +100,9 @@ public final class PixelImage extends BufferedImage {
                 samples = r.getPixel(col, row, samples);
 //                final Pixel newPixel = new Pixel(samples[0], samples[1], samples[2]);
 //                data[row][col] = newPixel;
-                
-                /*#3: Inline variable.
-                 * @author Zitao Yu
-                 */
                 data[row][col] = new Pixel(samples[0], samples[1], samples[2]);
             }
         }
-
         return data;
     }
 
@@ -147,9 +146,10 @@ public final class PixelImage extends BufferedImage {
         }
     }
     
-    /*
-     * #4: Extract method, to check if the array has a valid size, theSize parameter can be height or width.
-     * @author Zitao Yu
+    /* Refactoring #4: Extract method, to check if the array has a valid size, theSize parameter 
+     * can be height or width.
+     * Scope: method.
+     * Author: Zitao Yu
      */
     private boolean isValidArraySize(final int theLength, final int theSize) {
         return theLength != theSize;

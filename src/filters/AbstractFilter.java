@@ -15,6 +15,10 @@ import image.PixelImage;
  * @author Alan Fowler
  * @version 1.1
  */
+/* Refactoring #1: Inline variable and simplify arithmetic.
+ * Scope: Entire class.
+ * Author: Zitao Yu
+ */
 public abstract class AbstractFilter implements Filter {
     /**
      * The "Filter" suffix.
@@ -109,10 +113,6 @@ public abstract class AbstractFilter implements Filter {
                 sum += col;
             }
         }
-
-        /* #1: Simplify Arithmetic. From sum = sum + 1 to sum++.
-         * @author Zitao Yu
-         */
         if (sum == 0) {
             // sum = sum + 1;
             sum++;
@@ -155,9 +155,6 @@ public abstract class AbstractFilter implements Filter {
 //                        green = green + p.getGreen() * weight;
 //                        blue = blue + p.getBlue() * weight;
                         
-                        /* #5: Inline variable and simplify arithmetic.
-                         * @author Zitao Yu
-                         */
                         red += oldPixels[j][i].getRed() * theWeights[y - j + 1][x - i + 1];
                         green += oldPixels[j][i].getGreen() * theWeights[y - j + 1][x - i + 1];
                         blue += oldPixels[j][i].getBlue() * theWeights[y - j + 1][x - i + 1];

@@ -161,8 +161,9 @@ public class Pixel {
         }
     }
 
-    /* #2: Extract method, to check if color value if out of range.
-     * @author Zitao Yu
+    /* Refactoring #2: Extract method, to check if color value if out of range.
+     * Scope: method.
+     * Author: Zitao Yu
      */
     private boolean isColorValueOutOfRange(final int theValue) {
         return theValue < MIN_COLOR_VALUE || theValue > MAX_COLOR_VALUE;
