@@ -15,12 +15,17 @@ import image.PixelImage;
  * @author Alan Fowler
  * @version 1.1
  */
-/* Refactoring #1: Inline variable and simplify arithmetic.
+/*TODO Refactoring #1: Inline variable and simplify arithmetic.
  * Scope: Entire class.
  * Author: Zitao Yu
  */
 
-/* Refactoring #2: Change method declaration.
+/*TODO Refactoring #2: Change method declaration.
+ * Scope: Entire class.
+ * Author: Zitao Yu
+ */
+
+/*TODO Refactoring #5: Rename variable.
  * Scope: Entire class.
  * Author: Zitao Yu
  */
@@ -44,23 +49,28 @@ public abstract class AbstractFilter implements Filter {
      * class "snapshot.filters.EdgeDetectFilter" would end up with "EdgeDetect"
      * as its description.
      */
-    protected AbstractFilter() {
-        final String name = getClass().getName();
-        final int dot = name.lastIndexOf('.');
-        
-        //TODO Hyeong: 1. Changing multiple lines of if/else into in-line function which is shorter
-        myDescription = (dot >= 0 && name.endsWith(FILTER_SUFFIX)) ? 
-                                        (myDescription = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length())) 
-                                        : (myDescription = name.substring(dot + 1, name.length()));
-        
-        
-//        if (dot >= 0 && name.endsWith(FILTER_SUFFIX)) {
-//            // truncate the word "Filter"
-//            myDescription = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length());
-//        } else {
-//            myDescription = name.substring(dot + 1, name.length());
-//        }
-    }
+    /*TODO Refactoring #8: Remove unused constructor.
+     * Scope: Entire class.
+     * Author: Zitao Yu
+     */
+    
+//    protected AbstractFilter() {
+//        final String name = getClass().getName();
+//        final int dot = name.lastIndexOf('.');
+//        
+//        //TODO Hyeong: 1. Changing multiple lines of if/else into in-line function which is shorter
+//        myDescription = (dot >= 0 && name.endsWith(FILTER_SUFFIX)) ? 
+//                                        (myDescription = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length())) 
+//                                        : (myDescription = name.substring(dot + 1, name.length()));
+//        
+//        
+////        if (dot >= 0 && name.endsWith(FILTER_SUFFIX)) {
+////            // truncate the word "Filter"
+////            myDescription = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length());
+////        } else {
+////            myDescription = name.substring(dot + 1, name.length());
+////        }
+//    }
 
     /**
      * Constructs a filter with the specified description.
@@ -140,10 +150,6 @@ public abstract class AbstractFilter implements Filter {
     protected void applyPixelWeight(final PixelImage theImage, final int[][] theWeights,
                           final int theScale) throws IllegalArgumentException {
         checkWeights(theWeights);
-        /* Refactoring #5: Rename variable.
-         * Scope: This method.
-         * Author: Zitao Yu
-         */
 //        final int w = theImage.getWidth(null);
 //        final int h = theImage.getHeight(null);
         final int width = theImage.getWidth(null);
@@ -229,8 +235,10 @@ public abstract class AbstractFilter implements Filter {
      */
     protected void swapPixel(final Pixel[][] theData, final int row1, final int col1,
                         final int row2, final int col2) {
-        final Pixel temp = theData[row1][col1];
+        //final Pixel temp = theData[row1][col1];
+        final Pixel tempPixel = theData[row1][col1];
         theData[row1][col1] = theData[row2][col2];
-        theData[row2][col2] = temp;
+        //theData[row2][col2] = temp;
+        theData[row2][col2] = tempPixel;
     }
 }

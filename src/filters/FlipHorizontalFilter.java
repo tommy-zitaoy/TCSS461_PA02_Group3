@@ -30,7 +30,7 @@ public class FlipHorizontalFilter extends AbstractFilter {
      */
     @Override
     public void filter(final PixelImage theImage) {
-        /* Refactoring #7: Extract variable.
+        /*TODO Refactoring #7: Extract variable.
          * Scope: method.
          * Author: Zitao Yu
          */

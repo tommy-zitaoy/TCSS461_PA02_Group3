@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
  * @version 1.2
  */
 
-/* Refactoring #4: Inline variable.
+/*TODO Refactoring #4: Inline variable.
  * Scope: entire class.
  * Author: Zitao Yu
  */
@@ -119,23 +119,32 @@ public final class PixelImage extends BufferedImage {
     public void setPixelData(final Pixel[][] theData) throws IllegalArgumentException {
         final int[] pixelValues = new int[Pixel.NUM_CHANNELS];
         final WritableRaster wr = getRaster();
+        final int height = wr.getHeight();
+        final int width = wr.getWidth();
+        
         //TODO 4. Akshdeep: Assert theData is not null
         assert(theData != null);
-        //if (theData == null || theData.length != wr.getHeight()) {
-        if (theData == null || isValidArraySize(theData.length, wr.getHeight())) {
+        
+//        if (theData == null || theData.length != height ) {
+//            throw new IllegalArgumentException(ARRAY_ERROR);
+//        } else if (theData[0].length != width) {
+//            for (int i = 0; i < theData.length; i++) {
+//                if (theData[i] == null || theData[i].length != width) {
+//                    throw new IllegalArgumentException(ARRAY_ERROR);
+//                }
+//            }
+//        }
+        
+        /*TODO Refactoring #9: Decompose Conditional.
+         * Scope: method.
+         * Author: Zitao Yu
+         */
+        if(!this.isValidArraySize(theData, height, width)) { 
             throw new IllegalArgumentException(ARRAY_ERROR);
-        //} else if (theData[0].length != wr.getWidth()) {
-        } else if (isValidArraySize(theData[0].length, wr.getWidth())) {
-            for (int i = 0; i < theData.length; i++) {
-                //if (theData[i] == null || theData[i].length != wr.getWidth()) {
-                if (theData[i] == null || isValidArraySize(theData[i].length, wr.getWidth())) {
-                    throw new IllegalArgumentException(ARRAY_ERROR);
-                }
-            }
         }
-
-        for (int row = 0; row < wr.getHeight(); row++) {
-            for (int col = 0; col < wr.getWidth(); col++) {
+        
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 //TODO 5. Akshdeep: Create local variable pixel in order to make code easier to read.
                 Pixel pixel = theData[row][col];
                 pixelValues[0] = pixel.getRed();
@@ -146,12 +155,20 @@ public final class PixelImage extends BufferedImage {
         }
     }
     
-    /* Refactoring #3: Extract method, to check if the array has a valid size, theSize parameter 
-     * can be height or width.
-     * Scope: method.
-     * Author: Zitao Yu
-     */
-    private boolean isValidArraySize(final int theLength, final int theSize) {
-        return theLength != theSize;
+
+    private boolean isValidArraySize(final Pixel[][] theData, final int theHeight, final int theWidth) {
+        /*TODO Refactoring #10: Consolidate Conditional Expression.
+         * Scope: method.
+         * Author: Zitao Yu
+         */
+        for (int i = 0; i < theData.length; i++) {
+            if (theData[i] == null || theData[i].length != theWidth) {
+                return false;
+            }
+        }
+        if (theData == null || theData.length != theHeight) {
+            return false;
+        }
+        return true;
     }
 }

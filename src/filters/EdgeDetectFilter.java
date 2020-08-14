@@ -30,11 +30,6 @@ public class EdgeDetectFilter extends AbstractFilter {
      */
     public EdgeDetectFilter() {
 //        super("Edge Detect");
-        
-        /* Refactoring #6: Extract constant string.
-         * Scope: method.
-         * Author: Zitao Yu
-         */
         super(EDGE_DETECT);
     }
 

@@ -30,6 +30,25 @@ public class Pixel {
      */
     public static final int MAX_COLOR_VALUE = 255;
 
+    /*TODO Refactoring #6: Extract constant string.
+     * Scope: method.
+     * Author: Zitao Yu
+     */
+    /**
+     * Color red.
+     */
+    private static final String RED = "RED";
+    
+    /**
+     * Color blue.
+     */
+    private static final String BLUE = "BLUE";
+    
+    /**
+     * Color green.
+     */
+    private static final String GREEN = "GREEN";
+    
     // Instance Fields
 
     /**
@@ -106,7 +125,7 @@ public class Pixel {
      *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
      */
     public void setRed(final int theRed) throws IllegalArgumentException {
-        checkColorValueThenSet(theRed, "red");
+        checkColorValueThenSet(theRed, RED);
 //        myRed = theRed;
     }
 
@@ -118,7 +137,7 @@ public class Pixel {
      *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
      */
     public void setGreen(final int theGreen) throws IllegalArgumentException {
-        checkColorValueThenSet(theGreen, "green");
+        checkColorValueThenSet(theGreen, GREEN);
 //        myGreen = theGreen;
     }
 
@@ -130,7 +149,7 @@ public class Pixel {
      *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
      */
     public void setBlue(final int theBlue) throws IllegalArgumentException {
-        checkColorValueThenSet(theBlue, "blue");
+        checkColorValueThenSet(theBlue, BLUE);
 //        myBlue = theBlue;
     }
 
@@ -149,19 +168,19 @@ public class Pixel {
         }
         
         switch(theColor) {
-            case "red":
+            case RED:
                 myRed = theValue;
                 break;
-            case "blue":
+            case BLUE:
                 myBlue = theValue;
                 break;
-            case "green":
+            case GREEN:
                 myGreen = theValue;
                 break;
         }
     }
 
-    /* Refactoring #3: Extract method, to check if color value if out of range.
+    /*TODO Refactoring #3: Extract method, to check if color value if out of range.
      * Scope: method.
      * Author: Zitao Yu
      */
