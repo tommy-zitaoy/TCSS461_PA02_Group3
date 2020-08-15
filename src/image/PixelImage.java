@@ -91,6 +91,8 @@ public final class PixelImage extends BufferedImage {
      * @return the pixel data.
      */
     public Pixel[][] getPixelData() {
+    	//TODO 9. Akshdeep: Add comment to explain what an object of type Raster is since I didn't know myself. 
+        // Object of type Raster represents a rectangular array of pixels. It is defined by minX, minY, width, and height values.
         final Raster r = getRaster();
         final Pixel[][] data = new Pixel[r.getHeight()][r.getWidth()];
         int[] samples = new int[Pixel.NUM_CHANNELS];

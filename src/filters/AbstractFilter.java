@@ -160,9 +160,8 @@ public abstract class AbstractFilter implements Filter {
         for (int yAxis = 0; yAxis < height; yAxis++) {
             for (int xAxis = 0; xAxis < width; xAxis++) {
                 // add up 9 neighboring pixels
-                int red = 0;
-                int green = 0;
-                int blue = 0;
+            	//TODO 6. Akshdeep: declare variable in single line
+                int red = 0, blue = 0, green = 0;
                 for (int j = Math.max(0, yAxis - 1); j <= Math.min(yAxis + 1, height - 1); j++) {
                     for (int i = Math.max(0, xAxis - 1); i <= Math.min(xAxis + 1, width - 1); i++) {
                         // Pixel p = oldPixels[i][j];
@@ -172,9 +171,13 @@ public abstract class AbstractFilter implements Filter {
 //                        green = green + p.getGreen() * weight;
 //                        blue = blue + p.getBlue() * weight;
                         
-                        red += oldPixels[j][i].getRed() * theWeights[yAxis - j + 1][xAxis - i + 1];
-                        green += oldPixels[j][i].getGreen() * theWeights[yAxis - j + 1][xAxis - i + 1];
-                        blue += oldPixels[j][i].getBlue() * theWeights[yAxis - j + 1][xAxis - i + 1];
+                    	//TODO 7. Akshdeep: declare local variable pixel of type Pixel in order to make code more readable.
+                        final Pixel pixel = oldPixels[j][i];
+                        //TODO 8. Akshdeep: declare local variable 'k' of type int in order to make code more readable.
+						final int k = theWeights[yAxis - j + 1][xAxis - i + 1];
+						red += pixel.getRed() * k;
+                        green += pixel.getGreen() * k;
+                        blue += pixel.getBlue() * k;
                     }
                 }
 

@@ -117,41 +117,43 @@ public class Pixel {
         return myBlue;
     }
 
-    /**
-     * Sets the red value for this pixel to the specified value.
-     * 
-     * @param theRed The new value.
-     * @exception IllegalArgumentException if the specified value is less than
-     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
-     */
-    public void setRed(final int theRed) throws IllegalArgumentException {
-        checkColorValueThenSet(theRed, RED);
-//        myRed = theRed;
-    }
-
-    /**
-     * Sets the green value for this pixel to the specified value.
-     * 
-     * @param theGreen The new value.
-     * @exception IllegalArgumentException if the specified value is less than
-     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
-     */
-    public void setGreen(final int theGreen) throws IllegalArgumentException {
-        checkColorValueThenSet(theGreen, GREEN);
-//        myGreen = theGreen;
-    }
-
-    /**
-     * Sets the blue value for this pixel to the specified value.
-     * 
-     * @param theBlue The new value.
-     * @exception IllegalArgumentException if the specified value is less than
-     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
-     */
-    public void setBlue(final int theBlue) throws IllegalArgumentException {
-        checkColorValueThenSet(theBlue, BLUE);
-//        myBlue = theBlue;
-    }
+    //TODO 10. Akshdeep: Do not have any setter methods in class which can be accessed externally.
+    
+//    /**
+//     * Sets the red value for this pixel to the specified value.
+//     * 
+//     * @param theRed The new value.
+//     * @exception IllegalArgumentException if the specified value is less than
+//     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
+//     */
+//    public void setRed(final int theRed) throws IllegalArgumentException {
+//        checkColorValueThenSet(theRed, RED);
+////        myRed = theRed;
+//    }
+//
+//    /**
+//     * Sets the green value for this pixel to the specified value.
+//     * 
+//     * @param theGreen The new value.
+//     * @exception IllegalArgumentException if the specified value is less than
+//     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
+//     */
+//    public void setGreen(final int theGreen) throws IllegalArgumentException {
+//        checkColorValueThenSet(theGreen, GREEN);
+////        myGreen = theGreen;
+//    }
+//
+//    /**
+//     * Sets the blue value for this pixel to the specified value.
+//     * 
+//     * @param theBlue The new value.
+//     * @exception IllegalArgumentException if the specified value is less than
+//     *                MIN_COLOR_VALUE or greater than MAX_COLOR_VALUE.
+//     */
+//    public void setBlue(final int theBlue) throws IllegalArgumentException {
+//        checkColorValueThenSet(theBlue, BLUE);
+////        myBlue = theBlue;
+//    }
 
     /**
      * Checks to see if the specified color value is valid.
