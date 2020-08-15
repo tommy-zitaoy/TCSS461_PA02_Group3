@@ -121,8 +121,9 @@ public final class PixelImage extends BufferedImage {
     public void setPixelData(final Pixel[][] theData) throws IllegalArgumentException {
         final int[] pixelValues = new int[Pixel.NUM_CHANNELS];
         final WritableRaster wr = getRaster();
-        final int height = wr.getHeight();
-        final int width = wr.getWidth();
+        
+        //TODO Hyeong: 7. declare variable in single line
+        final int height = wr.getHeight(), width = wr.getWidth();
         
         //TODO 4. Akshdeep: Assert theData is not null
         assert(theData != null);
@@ -163,14 +164,22 @@ public final class PixelImage extends BufferedImage {
          * Scope: method.
          * Author: Zitao Yu
          */
+        
+        //TODO Hyeong: 8. Assert theData is not null
+        assert(theData != null);
+        
+        
+        //TODO Hyeong: 9. Consolidate Conditional Expression
+        boolean flag = false;
         for (int i = 0; i < theData.length; i++) {
             if (theData[i] == null || theData[i].length != theWidth) {
-                return false;
+                return flag;
             }
         }
         if (theData == null || theData.length != theHeight) {
-            return false;
+            return flag;
         }
-        return true;
+        flag = true;
+        return flag;
     }
 }
