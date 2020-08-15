@@ -55,10 +55,11 @@ public class GrayscaleFilter extends AbstractFilter {
     @Override
     public void filter(final PixelImage theImage) {
         
-        final int w = theImage.getWidth(null);
-        final int h = theImage.getHeight(null);
-        for (int i = 0; i < w; i++) {
-            for (int j = 0; j < h; j++) {
+        //TODO Hyeong: 10. Rename variables to make it look more readable 
+        final int weight = theImage.getWidth(null);
+        final int height = theImage.getHeight(null);
+        for (int i = 0; i < weight; i++) {
+            for (int j = 0; j < height; j++) {
                 final int p = theImage.getRGB(i, j);
                 final int q =
                         (((p >> RED_OFFSET) & MASK)
